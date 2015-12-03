@@ -1,11 +1,11 @@
 package com.ovoenergy.ovoroo
 
-import spray.routing._
-
 import scala.concurrent.ExecutionContext
 import scala.language.postfixOps
 
-import com.ovoenergy.ovoroo.resources.{PingResource, OrderResource}
+import spray.routing._
+
+import com.ovoenergy.ovoroo.resources.{OrderResource, PingResource}
 import com.ovoenergy.ovoroo.services.OrderService
 
 class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with Resources {
@@ -14,7 +14,11 @@ class RestInterface(implicit val executionContext: ExecutionContext) extends Htt
 
   val orderService = new OrderService
 
-  val routes: Route = pingRoutes ~ questionRoutes
+  val routes: Route =
+    pingRoutes ~
+    //authenticate(???) { authenticated =>
+      questionRoutes
+    //}
 
 }
 
