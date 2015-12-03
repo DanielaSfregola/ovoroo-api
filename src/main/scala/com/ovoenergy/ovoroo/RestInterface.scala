@@ -5,22 +5,25 @@ import scala.language.postfixOps
 
 import spray.http._
 import spray.routing._
+import spray.routing.authentication.BasicAuth
 
 import com.ovoenergy.ovoroo.resources.{OrderResource, PingResource}
 import com.ovoenergy.ovoroo.services.OrderService
 
-class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with Resources with CORSSupport {
+class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with CORSSupport with Resources {
 
   def receive = runRoute(routes)
 
   val orderService = new OrderService
 
   val routes: Route =
-    cors {
-        pingRoutes ~
+    pingRoutes ~
+    authenticate(BasicAuth(ldapAuthenticator _, realm = "Use for OVO windows credentials")) { ldapUser =>
+      cors {
         //authenticate(???) { authenticated =>
         questionRoutes
         //}
+      }
     }
 }
 
