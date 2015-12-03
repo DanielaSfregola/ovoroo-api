@@ -10,7 +10,7 @@ trait OrderResource extends MyHttpService {
 
   val orderService: OrderService
 
-  def questionRoutes: Route = pathPrefix("orders") {
+  def orderRoutes: Route = pathPrefix("orders") {
       pathEnd {
         createOrder ~
         findActiveOrderPerLocation

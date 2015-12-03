@@ -36,3 +36,10 @@ libraryDependencies ++= {
 mainClass in Global := Some("com.ovoenergy.ovoroo.Main")
 
 jarName in assembly := "ovoroo.jar"
+
+mergeStrategy in assembly := {
+  case x if x.startsWith("META-INF") && x.contains("spring") => MergeStrategy.discard
+  case x =>
+    val oldStrategy = (mergeStrategy in assembly).value
+    oldStrategy(x)
+}

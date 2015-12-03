@@ -7,7 +7,7 @@ import spray.http._
 import spray.routing._
 import spray.routing.authentication.BasicAuth
 
-import com.ovoenergy.ovoroo.resources.{OrderResource, PingResource}
+import com.ovoenergy.ovoroo.resources.{UserResource, OrderResource, PingResource}
 import com.ovoenergy.ovoroo.services.OrderService
 
 class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with CORSSupport with Resources {
@@ -20,14 +20,13 @@ class RestInterface(implicit val executionContext: ExecutionContext) extends Htt
     pingRoutes ~
     authenticate(BasicAuth(ldapAuthenticator _, realm = "Use for OVO windows credentials")) { ldapUser =>
       cors {
-        //authenticate(???) { authenticated =>
-        questionRoutes
-        //}
+        orderRoutes ~
+        userRoutes(ldapUser)
       }
     }
 }
 
-trait Resources extends OrderResource with PingResource
+trait Resources extends PingResource with OrderResource with UserResource
 
 trait CORSSupport {
   this: HttpService =>
