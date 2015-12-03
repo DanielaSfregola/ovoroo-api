@@ -1,11 +1,12 @@
-package com.danielasfregola.quiz.management
+package com.ovoenergy.ovoroo
 
-import com.danielasfregola.quiz.management.resources.QuestionResource
-import com.danielasfregola.quiz.management.services.QuestionService
 import spray.routing._
 
 import scala.concurrent.ExecutionContext
 import scala.language.postfixOps
+
+import com.ovoenergy.ovoroo.resources.QuestionResource
+import com.ovoenergy.ovoroo.services.QuestionService
 
 class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with Resources {
 

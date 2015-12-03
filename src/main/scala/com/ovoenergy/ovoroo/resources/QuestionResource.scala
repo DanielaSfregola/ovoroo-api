@@ -1,9 +1,10 @@
-package com.danielasfregola.quiz.management.resources
+package com.ovoenergy.ovoroo.resources
 
-import com.danielasfregola.quiz.management.entities.{QuestionUpdate, Question}
-import com.danielasfregola.quiz.management.routing.MyHttpService
-import com.danielasfregola.quiz.management.services.QuestionService
 import spray.routing._
+
+import com.ovoenergy.ovoroo.entities.{QuestionUpdate, Question}
+import com.ovoenergy.ovoroo.routing.MyHttpService
+import com.ovoenergy.ovoroo.services.QuestionService
 
 trait QuestionResource extends MyHttpService {
 

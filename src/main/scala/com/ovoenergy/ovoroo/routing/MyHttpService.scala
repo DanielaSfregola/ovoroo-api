@@ -1,10 +1,11 @@
-package com.danielasfregola.quiz.management.routing
+package com.ovoenergy.ovoroo.routing
 
-import com.danielasfregola.quiz.management.serializers.JsonSupport
 import spray.http.HttpHeaders
 import spray.routing._
 
 import scala.concurrent.{ExecutionContext, Future}
+
+import com.ovoenergy.ovoroo.serializers.JsonSupport
 
 trait MyHttpService extends HttpService with JsonSupport {
 

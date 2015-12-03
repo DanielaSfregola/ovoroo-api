@@ -1,10 +1,10 @@
 enablePlugins(JavaServerAppPackaging)
 
-name := "quiz-management-service"
+name := "ovoroo"
 
-version := "0.1"
+version := "0.1-SNAPSHOT"
 
-organization := "com.danielasfregola"
+organization := "com.ovoenergy"
 
 scalaVersion := "2.11.5"
 
@@ -31,6 +31,6 @@ libraryDependencies ++= {
 }
 
 // Assembly settings
-mainClass in Global := Some("com.danielasfregola.quiz.management.Main")
+mainClass in Global := Some("com.ovoenergy.ovoroo.Main")
 
-jarName in assembly := "quiz-management-server.jar"
+jarName in assembly := "ovoroo.jar"

@@ -1,3 +1,3 @@
-package com.danielasfregola.quiz.management.entities
+package com.ovoenergy.ovoroo.entities
 
 case class QuestionUpdate(title: Option[String], text: Option[String])

@@ -1,8 +1,8 @@
-package com.danielasfregola.quiz.management.services
-
-import com.danielasfregola.quiz.management.entities.{Question, QuestionUpdate}
+package com.ovoenergy.ovoroo.services
 
 import scala.concurrent.{ExecutionContext, Future}
+
+import com.ovoenergy.ovoroo.entities.{QuestionUpdate, Question}
 
 class QuestionService(implicit val executionContext: ExecutionContext) {
 

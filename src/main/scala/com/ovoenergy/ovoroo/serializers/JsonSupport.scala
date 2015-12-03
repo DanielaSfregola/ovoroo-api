@@ -1,4 +1,4 @@
-package com.danielasfregola.quiz.management.serializers
+package com.ovoenergy.ovoroo.serializers
 
 import java.text.SimpleDateFormat
 

@@ -1,4 +1,4 @@
-package com.danielasfregola.quiz.management
+package com.ovoenergy.ovoroo
 
 import akka.actor._
 import akka.io.IO
@@ -14,7 +14,7 @@ object Main extends App {
   val host = config.getString("http.host")
   val port = config.getInt("http.port")
 
-  implicit val system = ActorSystem("quiz-management-service")
+  implicit val system = ActorSystem("ovoroo")
   implicit val executionContext = system.dispatcher
   implicit val timeout = Timeout(10 seconds)
 
