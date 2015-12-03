@@ -3,6 +3,7 @@ package com.ovoenergy.ovoroo
 import scala.concurrent.ExecutionContext
 import scala.language.postfixOps
 
+import spray.http.HttpHeaders.RawHeader
 import spray.routing._
 
 import com.ovoenergy.ovoroo.resources.{OrderResource, PingResource}
@@ -15,10 +16,12 @@ class RestInterface(implicit val executionContext: ExecutionContext) extends Htt
   val orderService = new OrderService
 
   val routes: Route =
-    pingRoutes ~
-    //authenticate(???) { authenticated =>
+    respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
+      pingRoutes ~
+      //authenticate(???) { authenticated =>
       questionRoutes
-    //}
+      //}
+    }
 
 }
 

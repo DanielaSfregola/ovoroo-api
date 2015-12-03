@@ -1,27 +1,22 @@
 package com.ovoenergy.ovoroo.routing
 
+import scala.concurrent.Future
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import spray.routing.authentication._
+
+import scala.concurrent.ExecutionContext.Implicits.global
+
 trait Authentication {
 
-  //val authenticator = new LdapAuthenticator()
-  /*: LdapAuthenticator[Unit] = { ctx =>
-    Future {
-      val maybeCredentials = extractAuthQueryParam(ctx)
-      maybeCredentials.fold[authentication.Authentication[Unit]](
-        Left(AuthenticationFailedRejection(CredentialsMissing, List()))
-      )( credentials =>
-        credentials match {
-          case AppCredentials(appId, appSecret) => Right()
-          case _ => Left(AuthenticationFailedRejection(CredentialsRejected, List()))
-        }
-      )
-    }
-  }
 
-  private def extractAuthQueryParam(ctx: RequestContext): Option[AppCredentials] = {
-    val queryParam = ctx.request.uri.query.toMap
-    for {
-      id <- queryParam.get(AppIdParameter)
-      secret <- queryParam.get(AppSecretParameter)
-    } yield AppCredentials(id, secret)
-  }*/
+  def ldapAuthenticator(userPass: Option[UserPass]): Future[Option[String]] =
+    Future {
+      userPass.map { credentials =>
+        val token = new UsernamePasswordAuthenticationToken(credentials.user, credentials.pass)
+        //new AuthenticationProvider().authenticate(token)
+      }
+      if (userPass.exists(up => up.user == "John" && up.pass == "p4ssw0rd")) Some("John")
+      else None
+    }
 }

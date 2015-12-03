@@ -1,6 +1,5 @@
 package com.ovoenergy.ovoroo.resources
 
-import spray.http.HttpHeaders.RawHeader
 import spray.routing._
 
 import com.ovoenergy.ovoroo.entities.{Item, Order, User}
@@ -12,7 +11,6 @@ trait OrderResource extends MyHttpService {
   val orderService: OrderService
 
   def questionRoutes: Route = pathPrefix("orders") {
-    respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
       pathEnd {
         createOrder ~
         findActiveOrderPerLocation
@@ -23,7 +21,6 @@ trait OrderResource extends MyHttpService {
         addItemToOrder(id)
       }
     }
-  }
 
   private def createOrder =
     pathEnd {

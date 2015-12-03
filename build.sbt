@@ -24,6 +24,7 @@ libraryDependencies ++= {
     "ch.qos.logback"    %  "logback-classic" % "1.1.2",
     "org.json4s"        %% "json4s-native"   % Json4sVersion,
     "org.json4s"        %% "json4s-ext"      % Json4sVersion,
+    "org.springframework.security" % "spring-security-core" % "3.1.0.RELEASE",
     "com.typesafe.akka" %% "akka-testkit"    % AkkaVersion  % "test",
     "io.spray"          %% "spray-testkit"   % SprayVersion % "test",
     "org.specs2"        %% "specs2"          % "2.3.13"     % "test"
