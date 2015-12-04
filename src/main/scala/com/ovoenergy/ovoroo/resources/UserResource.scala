@@ -5,11 +5,8 @@ import spray.routing._
 
 import com.ovoenergy.ovoroo.entities.User
 import com.ovoenergy.ovoroo.routing.MyHttpService
-import com.ovoenergy.ovoroo.services.OrderService
 
 trait UserResource extends MyHttpService {
-
-  val orderService: OrderService
 
   def userRoutes(ldapUser: LdapUserDetails): Route = path("user") {
       val name = ldapUser.getDn.split(",")

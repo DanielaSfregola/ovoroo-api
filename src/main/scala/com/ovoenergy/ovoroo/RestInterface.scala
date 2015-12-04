@@ -7,7 +7,7 @@ import spray.http._
 import spray.routing._
 import spray.routing.authentication.BasicAuth
 
-import com.ovoenergy.ovoroo.resources.{UserResource, OrderResource, PingResource}
+import com.ovoenergy.ovoroo.resources.{OrderResource, PingResource, UserResource}
 import com.ovoenergy.ovoroo.services.OrderService
 
 class RestInterface(implicit val executionContext: ExecutionContext) extends HttpServiceActor with CORSSupport with Resources {

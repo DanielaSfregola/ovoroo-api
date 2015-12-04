@@ -14,13 +14,14 @@ object Main extends App {
   val host = config.getString("http.host")
   val port = config.getInt("http.port")
 
-  implicit val system = ActorSystem("ovoroo")
+  implicit val system = ActorSystem("ovoroo-server")
+
   implicit val executionContext = system.dispatcher
   implicit val timeout = Timeout(10 seconds)
 
-  val api = system.actorOf(Props(new RestInterface))
+  val server = system.actorOf(Props(new RestInterface))
 
-  IO(Http).ask(Http.Bind(listener = api, interface = host, port = port))
+  IO(Http).ask(Http.Bind(listener = server, interface = host, port = port))
     .mapTo[Http.Event]
     .map {
       case Http.Bound(address) =>
@@ -30,4 +31,16 @@ object Main extends App {
           s"$host:$port, ${cmd.failureMessage}")
         system.shutdown()
     }
+
+  val api = system.actorOf(Props(new AppInterface))
+  IO(Http).ask(Http.Bind(listener = api, interface = host, port = 80))
+  .mapTo[Http.Event]
+  .map {
+    case Http.Bound(address) =>
+      println(s"App bound to $address")
+    case Http.CommandFailed(cmd) =>
+      println("App could not bind to " +
+      s"$host:$port, ${cmd.failureMessage}")
+      system.shutdown()
+  }
 }
