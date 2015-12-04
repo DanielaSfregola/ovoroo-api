@@ -9,7 +9,7 @@ class AuthenticationService(implicit val executionContext: ExecutionContext) {
   var userSessions = Vector.empty[UserSession]
 
   def getOrCreateUserSession(user: User): Future[UserSession] = {
-    findSessionByUser(user).map { maybeSession =>
+    findSessionByUsername(user.name).map { maybeSession =>
       maybeSession match {
         case Some(session) => session
         case None => createSessionForUser(user)
@@ -17,8 +17,8 @@ class AuthenticationService(implicit val executionContext: ExecutionContext) {
     }
   }
 
-  private def findSessionByUser(user: User): Future[Option[UserSession]] = Future {
-    userSessions.find(_.user == user)
+  private def findSessionByUsername(username: String): Future[Option[UserSession]] = Future {
+    userSessions.find(_.user.name == username)
   }
 
   private def createSessionForUser(user: User): UserSession = {

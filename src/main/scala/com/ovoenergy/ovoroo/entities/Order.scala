@@ -14,7 +14,7 @@ case class Order(id: String = Random.alphanumeric.take(6).mkString,
   def isActive = creationDate.plusMinutes(duration).isAfterNow
 }
 
-case class User(name: String, email: String)
+case class User(name: String, email: String, slackId: String)
 
 case class Item(name: String, size: Size, extras: Seq[Size] = Seq.empty, requester: User)
 
