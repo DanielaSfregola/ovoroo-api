@@ -16,6 +16,9 @@ case class Order(id: String = Random.alphanumeric.take(6).mkString,
 
 case class User(name: String, email: String, slackId: String)
 
-case class Item(name: String, size: Size, extras: Seq[Size] = Seq.empty, requester: User)
+case class Item(name: String, size: Size, extras: Seq[Size] = Seq.empty, requester: User) {
+
+  def price = size.price + extras.map(_.price).sum
+}
 
 case class Size(name: String, price: Double)

@@ -15,7 +15,7 @@ class RestInterface(implicit val executionContext: ExecutionContext) extends Htt
 
   val orderService = new OrderService
   val authenticationService = new AuthenticationService
-
+  
   val routes: Route =
     cors {
       pingRoutes ~
@@ -23,6 +23,7 @@ class RestInterface(implicit val executionContext: ExecutionContext) extends Htt
       orderRoutes
     }
 
+  orderService.monitorOrders()
 }
 
 trait Resources extends PingResource with OrderResource with AuthResource
