@@ -60,7 +60,7 @@ class OrderService(implicit val executionContext: ExecutionContext) {
 
   private def deleteOrder(id: String): Unit = orders = orders.filterNot(_.id == id)
 
-  def monitorOrders() = {
+  def monitorOrders() = Future {
     orders.map { order =>
       if (!order.isActive) {
 
