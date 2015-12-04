@@ -7,7 +7,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 import com.ovoenergy.ovoroo.serializers.JsonSupport
 
-trait MyHttpService extends HttpService with JsonSupport with Authentication {
+trait MyHttpService extends HttpService with JsonSupport {
 
   implicit val executionContext: ExecutionContext
 

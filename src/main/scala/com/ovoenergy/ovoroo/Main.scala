@@ -33,18 +33,6 @@ object Main extends App {
           s"$host:$port, ${cmd.failureMessage}")
         system.shutdown()
     }
-
-  val api = system.actorOf(Props(new AppInterface))
-  IO(Http).ask(Http.Bind(listener = api, interface = host, port = adminPort))
-  .mapTo[Http.Event]
-  .map {
-    case Http.Bound(address) =>
-      println(s"App bound to $address")
-    case Http.CommandFailed(cmd) =>
-      println("App could not bind to " +
-      s"$host:$adminPort, ${cmd.failureMessage}")
-      system.shutdown()
-  }
 }
 
 
