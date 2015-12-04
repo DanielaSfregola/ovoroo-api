@@ -13,6 +13,8 @@ object Main extends App {
   val config = ConfigFactory.load()
   val host = config.getString("http.host")
   val port = config.getInt("http.port")
+  val adminPort = 8000
+
 
   implicit val system = ActorSystem("ovoroo-server")
 
@@ -33,14 +35,17 @@ object Main extends App {
     }
 
   val api = system.actorOf(Props(new AppInterface))
-  IO(Http).ask(Http.Bind(listener = api, interface = host, port = 8000))
+  IO(Http).ask(Http.Bind(listener = api, interface = host, port = adminPort))
   .mapTo[Http.Event]
   .map {
     case Http.Bound(address) =>
       println(s"App bound to $address")
     case Http.CommandFailed(cmd) =>
       println("App could not bind to " +
-      s"$host:$port, ${cmd.failureMessage}")
+      s"$host:$adminPort, ${cmd.failureMessage}")
       system.shutdown()
   }
 }
+
+
+
