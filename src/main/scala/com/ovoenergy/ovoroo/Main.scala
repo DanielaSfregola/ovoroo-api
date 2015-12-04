@@ -33,7 +33,7 @@ object Main extends App {
     }
 
   val api = system.actorOf(Props(new AppInterface))
-  IO(Http).ask(Http.Bind(listener = api, interface = host, port = 80))
+  IO(Http).ask(Http.Bind(listener = api, interface = host, port = 8000))
   .mapTo[Http.Event]
   .map {
     case Http.Bound(address) =>
