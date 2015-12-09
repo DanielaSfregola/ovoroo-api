@@ -23,7 +23,6 @@ class SlackClient(implicit val ec: ExecutionContext) {
 
   def findSlackIdByEmail(email: String): Future[Option[String]] =
     client.listUsers().map { users =>
-      println(users)
       val maybeUser = users.find{ user =>
         val userEmail = user.profile.flatMap(_.email).getOrElse("")
         userEmail == email
